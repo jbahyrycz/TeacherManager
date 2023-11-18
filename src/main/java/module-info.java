@@ -1,8 +1,11 @@
-module com.example.teachersgroups {
+module frontend {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.teachersgroups to javafx.fxml;
-    exports com.example.teachersgroups;
+    opens frontend to javafx.fxml;
+    exports frontend;
+
+    opens backend to javafx.fxml;
+    exports backend;
 }
