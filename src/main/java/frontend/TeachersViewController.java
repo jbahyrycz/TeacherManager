@@ -7,14 +7,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TeachersViewController extends BasicController implements Initializable{
+public class TeachersViewController extends MainViewController implements Initializable{
+    private boolean modifying = false;
+    private int selectedID = -1;
     @FXML
     private TableView<Teacher> teachersTable;
     @FXML
@@ -46,35 +43,49 @@ public class TeachersViewController extends BasicController implements Initializ
     @FXML
     private ChoiceBox<String> conditionInput;
     @FXML
-    void addTeacherSubmit(ActionEvent event)
+    void addTeacherSubmit(ActionEvent event) throws IOException
     {
-        String condStr = conditionInput.getValue();
-        Teacher teacher = new Teacher(firstNameInput.getText(),
-                lastNameInput.getText(),
-                getTeacherCondFromString(condStr),
-                Integer.parseInt(yearOfBirthInput.getText()),
-                Double.parseDouble(salaryInput.getText()));
-        TeachersInfo.teachers.add(teacher);
+        if (modifying)
+        {
+            TeachersInfo.teachers.get(selectedID).setFirstName(firstNameInput.getText());
+            TeachersInfo.teachers.get(selectedID).setLastName(lastNameInput.getText());
+            TeachersInfo.teachers.get(selectedID).setCond(getTeacherCondFromString(conditionInput.getValue()));
+            TeachersInfo.teachers.get(selectedID).setYearOfBirth(Integer.parseInt(yearOfBirthInput.getText()));
+            TeachersInfo.teachers.get(selectedID).setSalary(Double.parseDouble(salaryInput.getText()));
+            selectedID = -1;
+            modifying = false;
+        }
+        else
+        {
+            Teacher teacher = new Teacher(firstNameInput.getText(),
+                    lastNameInput.getText(),
+                    getTeacherCondFromString(conditionInput.getValue()),
+                    Integer.parseInt(yearOfBirthInput.getText()),
+                    Double.parseDouble(salaryInput.getText()));
+            TeachersInfo.teachers.add(teacher);
+        }
         teachersTable.setItems(TeachersInfo.teachers);
+        switchToTeachersView(event);
     }
     @FXML
     void removeTeacher(ActionEvent event)
     {
-        int selectedID = teachersTable.getSelectionModel().getSelectedIndex();
+        selectedID = teachersTable.getSelectionModel().getSelectedIndex();
         teachersTable.getItems().remove(selectedID);
         TeachersInfo.teachers = teachersTable.getItems();
     }
     @FXML
     void modifyTeachersData(ActionEvent event)
     {
-        int selectedID = teachersTable.getSelectionModel().getSelectedIndex();
+        modifying = true;
+        selectedID = teachersTable.getSelectionModel().getSelectedIndex();
         Teacher teacher = TeachersInfo.teachers.get(selectedID);
         firstNameInput.setText(teacher.getFirstName());
         lastNameInput.setText(teacher.getLastName());
         conditionInput.setValue(getStringFromTeacherCondition(teacher.getCond()));
         yearOfBirthInput.setText(Integer.toString(teacher.getYearOfBirth()));
         salaryInput.setText(Double.toString(teacher.getSalary()));
-        teachersTable.getItems().remove(selectedID);
+        //teachersTable.getItems().remove(selectedID);
         TeachersInfo.teachers = teachersTable.getItems();
     }
     @Override

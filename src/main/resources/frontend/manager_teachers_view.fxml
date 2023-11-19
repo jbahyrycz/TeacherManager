@@ -46,11 +46,7 @@
   <children>
     <AnchorPane prefHeight="750.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label fx:id="firstName" layoutX="15.0" layoutY="60.0" prefHeight="27.0" prefWidth="59.0" text="First name:" AnchorPane.bottomAnchor="313.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="567.0" AnchorPane.topAnchor="60.0">
-               <padding>
-                  <Insets top="10.0" />
-               </padding></Label>
-            <Button fx:id="returnButton" layoutX="30.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchToMainView" text=" &lt;- Return to menu" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="20.0" />
+            <Button fx:id="returnButton" layoutX="30.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchToMainView" text=" &lt;- Return to menu" AnchorPane.bottomAnchor="355.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="20.0" />
             <TableView fx:id="teachersTable" layoutX="175.0" layoutY="28.0" prefHeight="278.0" prefWidth="451.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0">
               <columns>
                 <TableColumn fx:id="firstNameColumn" prefWidth="93.0" text="First name" />
@@ -60,30 +56,20 @@
                   <TableColumn fx:id="conditionColumn" prefWidth="102.0" text="Condition" />
               </columns>
             </TableView>
-            <TextField fx:id="firstNameInput" layoutX="15.0" layoutY="87.0" AnchorPane.leftAnchor="15.0" />
-            <Label fx:id="yearOfBirth" layoutX="15.0" layoutY="164.0" text="Year of birth:" AnchorPane.leftAnchor="15.0">
+            <TextField fx:id="firstNameInput" layoutX="15.0" layoutY="87.0" promptText="First name" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="80.0" />
+            <TextField fx:id="lastNameInput" layoutX="15.0" layoutY="139.0" promptText="Last name" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="110.0" />
+            <TextField fx:id="yearOfBirthInput" layoutX="15.0" layoutY="191.0" promptText="Year of birth" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="140.0" />
+            <TextField fx:id="salaryInput" layoutX="15.0" layoutY="243.0" promptText="Salary" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="170.0" />
+            <Button fx:id="addTeacherButton" layoutX="63.0" layoutY="355.0" mnemonicParsing="false" onAction="#addTeacherSubmit" text="Submit" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="523.0" AnchorPane.topAnchor="230.0" />
+            <Button fx:id="removeTeacherButton" layoutX="371.0" layoutY="361.0" mnemonicParsing="false" onAction="#removeTeacher" text="Remove" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="210.0" AnchorPane.topAnchor="355.0" />
+            <ChoiceBox fx:id="conditionInput" layoutX="15.0" layoutY="295.0" prefWidth="150.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="200.0" />
+            <Button fx:id="modifyDataButton" layoutX="360.0" layoutY="330.0" mnemonicParsing="false" onAction="#modifyTeachersData" text="Modify data" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="325.0" />
+            <Label layoutX="15.0" layoutY="53.0" text="Add/modify teacher" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="50.0">
                <padding>
-                  <Insets top="10.0" />
-               </padding></Label>
-            <Label fx:id="lastName" layoutX="15.0" layoutY="112.0" text="Last name:" AnchorPane.leftAnchor="15.0">
-               <padding>
-                  <Insets top="10.0" />
-               </padding></Label>
-            <Label fx:id="salary" layoutX="15.0" layoutY="216.0" prefWidth="35.0" text="Salary:" AnchorPane.leftAnchor="15.0">
-               <padding>
-                  <Insets top="10.0" />
-               </padding></Label>
-            <Label fx:id="condition" layoutX="15.0" layoutY="268.0" text="Condition" AnchorPane.leftAnchor="15.0">
-               <padding>
-                  <Insets top="10.0" />
-               </padding></Label>
-            <TextField fx:id="lastNameInput" layoutX="15.0" layoutY="139.0" AnchorPane.leftAnchor="15.0" />
-            <TextField fx:id="yearOfBirthInput" layoutX="15.0" layoutY="191.0" AnchorPane.leftAnchor="15.0" />
-            <TextField fx:id="salaryInput" layoutX="15.0" layoutY="243.0" AnchorPane.leftAnchor="15.0" />
-            <Button fx:id="addTeacherButton" layoutX="63.0" layoutY="355.0" mnemonicParsing="false" onAction="#addTeacherSubmit" text="Submit" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="523.0" />
-            <Button fx:id="removeTeacherButton" layoutX="371.0" layoutY="361.0" mnemonicParsing="false" onAction="#removeTeacher" text="Remove" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="210.0" />
-            <ChoiceBox fx:id="conditionInput" layoutX="15.0" layoutY="295.0" prefWidth="150.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="15.0" />
-            <Button fx:id="modifyDataButton" layoutX="360.0" layoutY="330.0" mnemonicParsing="false" onAction="#modifyTeachersData" text="Modify data" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="200.0" />
+                  <Insets top="13.0" />
+               </padding>
+            </Label>
+            <Label fx:id="errorLabel" layoutX="14.0" layoutY="359.0" prefHeight="17.0" prefWidth="330.0" AnchorPane.bottomAnchor="20.0" />
       </children>
     </AnchorPane>
   </children>

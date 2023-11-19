@@ -1,4 +1,6 @@
 package backend;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +32,7 @@ public class ClassTeacher {
         }
     }
 
-    public void addTeacher(Teacher t)
+    public void addTeacher(Teacher t) throws Exception
     {
         if (teachers.size() < maxNumOfTeachers)
         {
@@ -47,7 +49,7 @@ public class ClassTeacher {
         }
         else
         {
-            System.out.println("The group: " + groupName + " is already full, cannot add a new teacher");
+            throw new Exception("The group is already full");
         }
     }
 
@@ -136,6 +138,14 @@ public class ClassTeacher {
     public List<Teacher> getTeachers()
     {
         return this.teachers;
+    }
+    public void setTeachers(ObservableList<Teacher> teachers)
+    {
+        this.teachers = teachers;
+    }
+    public String getGroupName()
+    {
+        return this.groupName;
     }
 
 }
