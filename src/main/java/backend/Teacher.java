@@ -30,7 +30,6 @@ public class Teacher implements Comparable <Teacher> {
     {
         return this.firstName;
     }
-
     public String getLastName()
     {
         return this.lastName;

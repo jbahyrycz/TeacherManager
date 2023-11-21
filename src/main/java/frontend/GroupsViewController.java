@@ -18,7 +18,6 @@ import java.util.ResourceBundle;
 
 public class GroupsViewController extends MainViewController implements Initializable {
     private ObservableList<Teacher> teachers = FXCollections.observableArrayList();
-    private ClassTeacher activeGroup;
     private List<String> groupNamesList = new ArrayList<String>();
     @FXML
     private TableView<Teacher> teachersTable;
@@ -47,9 +46,9 @@ public class GroupsViewController extends MainViewController implements Initiali
     @FXML
     void searchTeacher(ActionEvent event)
     {
-        activeGroup.searchPartial(searchField.getText());
+        CommonDataStorage.activeGroup.searchPartial(searchField.getText());
         teachers = FXCollections.observableArrayList();
-        teachers.addAll(activeGroup.searchPartial(searchField.getText()));
+        teachers.addAll(CommonDataStorage.activeGroup.searchPartial(searchField.getText()));
         teachersTable.setItems(teachers);
     }
     @FXML
@@ -57,12 +56,12 @@ public class GroupsViewController extends MainViewController implements Initiali
     {
         int selectedID = teachersTable.getSelectionModel().getSelectedIndex();
         teachersTable.getItems().remove(selectedID);
-        activeGroup.setTeachers(teachersTable.getItems());
+        CommonDataStorage.activeGroup.setTeachers(teachersTable.getItems());
     }
     @FXML
     void removeGroup(ActionEvent event) throws IOException
     {
-        ClassTeacher groupToRemove = activeGroup;
+        ClassTeacher groupToRemove = CommonDataStorage.activeGroup;
         int selectedID = groupNameInput.getSelectionModel().getSelectedIndex();
         if (selectedID == 0){
             groupNameInput.setValue(groupNameInput.getItems().get(1));
@@ -71,7 +70,7 @@ public class GroupsViewController extends MainViewController implements Initiali
         {
             groupNameInput.setValue(groupNameInput.getItems().get(0));
         }
-        ContainerInfo.container.removeClass(groupToRemove.getGroupName());
+        CommonDataStorage.container.removeClass(groupToRemove.getGroupName());
         switchToGroupsView(event);
     }
     @FXML
@@ -79,7 +78,7 @@ public class GroupsViewController extends MainViewController implements Initiali
     {
         String groupName = addGroupNameInput.getText();
         int maxNumOfTeachers = Integer.parseInt(numOfTeachersInput.getText());
-        ContainerInfo.container.addClass(groupName, maxNumOfTeachers);
+        CommonDataStorage.container.addClass(groupName, maxNumOfTeachers);
         switchToGroupsView(event);
     }
     @FXML
@@ -87,7 +86,7 @@ public class GroupsViewController extends MainViewController implements Initiali
     {
         try
         {
-            activeGroup.addTeacher(TeachersInfo.findTeacherByName(addTeacherInput.getValue()));
+            CommonDataStorage.activeGroup.addTeacher(CommonDataStorage.findTeacherByName(addTeacherInput.getValue()));
             switchToGroupsView(event);
         }
         catch(Exception e)
@@ -98,7 +97,7 @@ public class GroupsViewController extends MainViewController implements Initiali
     public void initializeTeachersChoiceBox()
     {
         List<String> names = new ArrayList<String>();
-        for (Teacher teacher : TeachersInfo.teachers)
+        for (Teacher teacher : CommonDataStorage.teachers)
         {
             names.add(teacher.getFirstName()+" "+teacher.getLastName());
         }
@@ -107,16 +106,18 @@ public class GroupsViewController extends MainViewController implements Initiali
     }
     public void initializeGroupNames()
     {
-        groupNameInput.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-        @Override
-        public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2)
+        groupNameInput.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
         {
-            activeGroup = ContainerInfo.container.groups.get(groupNameInput.getItems().get((Integer) number2));
-            teachers = FXCollections.observableList(activeGroup.getTeachers());
-            teachersTable.setItems(teachers);
-        }});
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2)
+            {
+                CommonDataStorage.activeGroup = CommonDataStorage.container.groups.get(groupNameInput.getItems().get((Integer) number2));
+                teachers = FXCollections.observableList(CommonDataStorage.activeGroup.getTeachers());
+                teachersTable.setItems(teachers);
+            }
+        });
         groupNamesList = new ArrayList<String>();
-        for (String groupName : ContainerInfo.container.groups.keySet())
+        for (String groupName : CommonDataStorage.container.groups.keySet())
         {
             groupNamesList.add(groupName);
         }
@@ -138,7 +139,7 @@ public class GroupsViewController extends MainViewController implements Initiali
         yearOfBirthColumn.setCellValueFactory(new PropertyValueFactory<Teacher, Integer>("yearOfBirth"));
         salaryColumn.setCellValueFactory(new PropertyValueFactory<Teacher, Double>("salary"));
         conditionColumn.setCellValueFactory(new PropertyValueFactory<Teacher, TeacherCondition>("cond"));
-        teachers = FXCollections.observableList(activeGroup.getTeachers());
+        teachers = FXCollections.observableList(CommonDataStorage.activeGroup.getTeachers());
         teachersTable.setItems(teachers);
     }
 }

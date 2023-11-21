@@ -40,8 +40,7 @@ public class ClassTeacher {
             {
                 if (t.compareTo(teachers.get(i)) == 0)
                 {
-                    System.out.println("Teacher named " + t.firstName + " " + t.lastName + " is already assigned to the group: " + groupName);
-                    return;
+                    throw new Exception(t.firstName + " " + t.lastName + " is already assigned to this group");
                 }
             }
             teachers.add(t);

@@ -3,7 +3,9 @@ package backend;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class TeachersInfo {
+public class CommonDataStorage {
+    public static ClassTeacher activeGroup;
+    public static ClassContainer container = new ClassContainer();
     public static ObservableList<Teacher> teachers = FXCollections.observableArrayList();
     public static Teacher findTeacherByName(String name)
     {

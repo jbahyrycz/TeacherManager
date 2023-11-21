@@ -2,7 +2,7 @@ package frontend;
 
 import backend.Teacher;
 import backend.TeacherCondition;
-import backend.TeachersInfo;
+import backend.CommonDataStorage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,11 +47,11 @@ public class TeachersViewController extends MainViewController implements Initia
     {
         if (modifying)
         {
-            TeachersInfo.teachers.get(selectedID).setFirstName(firstNameInput.getText());
-            TeachersInfo.teachers.get(selectedID).setLastName(lastNameInput.getText());
-            TeachersInfo.teachers.get(selectedID).setCond(getTeacherCondFromString(conditionInput.getValue()));
-            TeachersInfo.teachers.get(selectedID).setYearOfBirth(Integer.parseInt(yearOfBirthInput.getText()));
-            TeachersInfo.teachers.get(selectedID).setSalary(Double.parseDouble(salaryInput.getText()));
+            CommonDataStorage.teachers.get(selectedID).setFirstName(firstNameInput.getText());
+            CommonDataStorage.teachers.get(selectedID).setLastName(lastNameInput.getText());
+            CommonDataStorage.teachers.get(selectedID).setCond(getTeacherCondFromString(conditionInput.getValue()));
+            CommonDataStorage.teachers.get(selectedID).setYearOfBirth(Integer.parseInt(yearOfBirthInput.getText()));
+            CommonDataStorage.teachers.get(selectedID).setSalary(Double.parseDouble(salaryInput.getText()));
             selectedID = -1;
             modifying = false;
         }
@@ -62,9 +62,9 @@ public class TeachersViewController extends MainViewController implements Initia
                     getTeacherCondFromString(conditionInput.getValue()),
                     Integer.parseInt(yearOfBirthInput.getText()),
                     Double.parseDouble(salaryInput.getText()));
-            TeachersInfo.teachers.add(teacher);
+            CommonDataStorage.teachers.add(teacher);
         }
-        teachersTable.setItems(TeachersInfo.teachers);
+        teachersTable.setItems(CommonDataStorage.teachers);
         switchToTeachersView(event);
     }
     @FXML
@@ -72,21 +72,20 @@ public class TeachersViewController extends MainViewController implements Initia
     {
         selectedID = teachersTable.getSelectionModel().getSelectedIndex();
         teachersTable.getItems().remove(selectedID);
-        TeachersInfo.teachers = teachersTable.getItems();
+        CommonDataStorage.teachers = teachersTable.getItems();
     }
     @FXML
     void modifyTeachersData(ActionEvent event)
     {
         modifying = true;
         selectedID = teachersTable.getSelectionModel().getSelectedIndex();
-        Teacher teacher = TeachersInfo.teachers.get(selectedID);
+        Teacher teacher = CommonDataStorage.teachers.get(selectedID);
         firstNameInput.setText(teacher.getFirstName());
         lastNameInput.setText(teacher.getLastName());
         conditionInput.setValue(getStringFromTeacherCondition(teacher.getCond()));
         yearOfBirthInput.setText(Integer.toString(teacher.getYearOfBirth()));
         salaryInput.setText(Double.toString(teacher.getSalary()));
-        //teachersTable.getItems().remove(selectedID);
-        TeachersInfo.teachers = teachersTable.getItems();
+        CommonDataStorage.teachers = teachersTable.getItems();
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -97,7 +96,7 @@ public class TeachersViewController extends MainViewController implements Initia
         yearOfBirthColumn.setCellValueFactory(new PropertyValueFactory<Teacher, Integer>("yearOfBirth"));
         salaryColumn.setCellValueFactory(new PropertyValueFactory<Teacher, Double>("salary"));
         conditionColumn.setCellValueFactory(new PropertyValueFactory<Teacher, TeacherCondition>("cond"));
-        teachersTable.setItems(TeachersInfo.teachers);
+        teachersTable.setItems(CommonDataStorage.teachers);
 
         // Configure the choice box
         List<String> choicesList = new ArrayList<String>();
