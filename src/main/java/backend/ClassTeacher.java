@@ -44,7 +44,6 @@ public class ClassTeacher {
                 }
             }
             teachers.add(t);
-            System.out.println("Teacher named " + t.firstName + " " + t.lastName + " successfully added to the group: " + groupName);
         }
         else
         {

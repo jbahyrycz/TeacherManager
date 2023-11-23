@@ -23,16 +23,16 @@ public class TeacherManagerApplication extends Application{
     }
     public void initializeTeachers()
     {
-        CommonDataStorage.teachers.add(new Teacher("Julia", "Bahyrycz", TeacherCondition.present, 2003, 7000));
-        CommonDataStorage.teachers.add(new Teacher("Łukasz", "Gajewski", TeacherCondition.present, 2002, 6999.5));
-        CommonDataStorage.teachers.add(new Teacher("Patryk", "Bindas", TeacherCondition.sick, 2002, 2000));
-        CommonDataStorage.teachers.add(new Teacher("Jakub", "Baruś", TeacherCondition.delegation, 2002, 5000));
-        CommonDataStorage.teachers.add(new Teacher("Michał", "Bartoszek", TeacherCondition.absent, 2002, 3000));
-        CommonDataStorage.teachers.add(new Teacher("Jan", "Baran", TeacherCondition.present, 2001, 4000));
-        CommonDataStorage.teachers.add(new Teacher("Alan", "Abdi", TeacherCondition.present, 2001, 3000));
-        CommonDataStorage.teachers.add(new Teacher("Szymon", "Bołd", TeacherCondition.present, 2003, 6999));
-        CommonDataStorage.teachers.add(new Teacher("Karol", "Dziadkowiec", TeacherCondition.present, 2002, 6000));
-        CommonDataStorage.teachers.add(new Teacher("Tomasz", "Bulanda", TeacherCondition.present, 2002, 3700));
+        CommonDataStorage.teachers.add(new Teacher("John1", "Smith1", TeacherCondition.present, 2003, 7000));
+        CommonDataStorage.teachers.add(new Teacher("John2", "Smith2", TeacherCondition.present, 2002, 6999.5));
+        CommonDataStorage.teachers.add(new Teacher("John3", "Smith3", TeacherCondition.sick, 2002, 2000));
+        CommonDataStorage.teachers.add(new Teacher("John4", "Smith4", TeacherCondition.delegation, 2002, 5000));
+        CommonDataStorage.teachers.add(new Teacher("John5", "Smith5", TeacherCondition.absent, 2002, 3000));
+        CommonDataStorage.teachers.add(new Teacher("John6", "Smith6", TeacherCondition.present, 2001, 4000));
+        CommonDataStorage.teachers.add(new Teacher("John7", "Smith7", TeacherCondition.present, 2001, 3000));
+        CommonDataStorage.teachers.add(new Teacher("John8", "Smith8", TeacherCondition.present, 2003, 6999));
+        CommonDataStorage.teachers.add(new Teacher("John9", "Smith9", TeacherCondition.present, 2002, 6000));
+        CommonDataStorage.teachers.add(new Teacher("John10", "Smith10", TeacherCondition.present, 2002, 3700));
     }
     public void initializeContainer()
     {
