@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class TeacherManagerApplication extends Application{
+public class TeachersManagerApplication extends Application{
     @Override
     public void start(Stage stage) throws IOException
     {
